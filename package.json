@@ -1,0 +1,15 @@
+{
+  "name": "stacktrace-cli",
+  "bin": "./stack-cli.js",
+  "version": "1.0.0",
+  "description": "Show source-mapped line numbers",
+  "main": "stack-cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^1.19.0"
+  }
+}
