@@ -1,5 +1,5 @@
 {
-  "name": "stacktrace-cli",
+  "name": "@fatso83/stacktrace-cli",
   "bin": "./stack-cli.js",
   "version": "1.0.0",
   "description": "Show source-mapped line numbers",
