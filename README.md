@@ -11,7 +11,7 @@ If you download then download `app-bundle.js` and `app-bundle.js.map` you can ge
 source lines using this tool:
 
 ```
- npx stacktrace-cli dist/app-bundle.js* 129:600036
+ npx @fatso83/stacktrace-cli dist/app-bundle.js* 129:600036
 {
     "columnNumber": 56,
     "lineNumber": 78,
