@@ -5,7 +5,7 @@
     "type": "git",
     "url": "http://github.com/fatso83/stacktrace-cli"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Show source-mapped line numbers",
   "main": "stack-cli.js",
   "scripts": {
