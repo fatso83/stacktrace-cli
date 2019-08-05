@@ -11,7 +11,7 @@ If you download then download `app-bundle.js` and `app-bundle.js.map` you can ge
 source lines using this tool:
 
 ```
- npx @fatso83/stacktrace-cli dist/app-bundle.js* 129:600036
+$ npx @fatso83/stacktrace-cli dist/app-bundle.js* 129:600036
 {
     "columnNumber": 56,
     "lineNumber": 78,
@@ -25,6 +25,14 @@ source lines using this tool:
     "functionName": "map"
 }
 ```
+
+## Install
+You don't need to install it now that we have `npx` (see example), but you can install it globally if you want to:
+```
+npm install -g @fatso83/stacktrace-cli
+```
+
+You can then call it as `stacktrace-cli` wherever you are.
 
 ## How?
 - Stacktrace.js
