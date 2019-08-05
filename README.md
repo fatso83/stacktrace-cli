@@ -7,24 +7,25 @@ You have such an error in your logs:
 https://localhost:56962/app-bundle.js 129:600036 TypeError: Cannot read property 'map' of undefined
 ```
 
-If you download then download `app-bundle.js` and `app-bundle.js.map` you can get the original 
-source lines using this tool:
+If you download `app-bundle.js` and `app-bundle.js.map` you can get the original 
+source lines like this:
 
 ```
 $ npx @fatso83/stacktrace-cli dist/app-bundle.js* 129:600036
 {
     "columnNumber": 56,
     "lineNumber": 78,
-    "fileName": "webpack:///src/store/entitys/entitys-reducer.js",
-    "functionName": "getEntitysById"
+    "fileName": "webpack:///src/store/entities/entities-reducer.js",
+    "functionName": "getEntitiesById"
 }
 {
     "columnNumber": 56,
     "lineNumber": 78,
-    "fileName": "webpack:///src/store/entitys/entitys-reducer.js",
+    "fileName": "webpack:///src/store/entities/entities-reducer.js",
     "functionName": "map"
 }
 ```
+`getEntitiesById` is the function the error was thrown. `map` was the symbol that caused it (`undefined` called as function).
 
 ## Install
 You don't need to install it now that we have `npx` (see example), but you can install it globally if you want to:
