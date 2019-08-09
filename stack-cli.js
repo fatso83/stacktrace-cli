@@ -17,6 +17,7 @@ if (process.argv.length != 5) {
 const puppeteer = require("puppeteer");
 const http = require("http");
 const fs = require("fs");
+const { basename } = require("path");
 const port = Number(process.env.PORT || 8000);
 const stackutilsName = "stackutils.js";
 const minifiedSource = process.argv[2];
@@ -34,32 +35,9 @@ const htmlWithModuleScript = `
 <script src="stackutils/stacktrace.js"></script>
 
 <script>
-async function main(){
-    var stackframe = new StackFrame({fileName: 'http://localhost:${port}/${minifiedSource}', lineNumber: ${errLine}, columnNumber: ${errColumn}});
+    ${fs.readFileSync(__dirname + "/browser-script.js")}
 
-    var callback = function myCallback(stackframe) { console.log(JSON.stringify(stackframe, null, 4)); };
-
-    var errback = function myErrback(error) { 
-                console.log('stacktrace utils error: ', error.message); 
-                //StackTrace.fromError(error).then(enhancedErr => console.log('enhanced', enhancedErr)); 
-    };
-
-    var gps = new StackTraceGPS();
-
-    // Pinpoint actual function name and source-mapped location
-    await gps.pinpoint(stackframe).then(callback, errback);
-
-    // Better location/name information from source maps
-    await gps.getMappedLocation(stackframe).then(callback, errback);
-
-    // For some reason, this doesn't complete in Puppeteer, but does in normal Chrome 
-    // Get function name from location information
-    //await gps.findFunctionName(stackframe).then(callback, errback);
-    
-    console.log("finito")
-}
-
-main();
+    main(${port}, ${errLine}, ${errColumn})
 </script>
 `;
 
@@ -86,6 +64,11 @@ async function evaluatePageContent() {
     throw err;
   });
 
+  page.on("pageerror", function(err) {
+    const errorString = err.toString();
+    console.log("Page error: " + errorString);
+  });
+
   // our "assertion framework" :)
   page.on("console", function(msg) {
     var text = msg.text();
@@ -110,10 +93,10 @@ const app = http.createServer((req, res) => {
   if (match) {
     body = fs.readFileSync(`${__dirname}/assets/${match[1]}`);
     type = "application/javascript";
-  } else if (req.url.match(new RegExp(minifiedSource + "$"))) {
+  } else if (req.url.match(new RegExp(/bundle.js/))) {
     body = fs.readFileSync(minifiedSource);
     type = "application/javascript";
-  } else if (req.url.match(new RegExp(sourceMap + "$"))) {
+  } else if (req.url.match(new RegExp(basename(sourceMap) + "$"))) {
     body = fs.readFileSync(sourceMap);
     type = "application/octet-stream";
   } else {
