@@ -25,7 +25,6 @@ const sourceMap = process.argv[3];
 const errLocation = process.argv[4].split(":");
 const errLine = errLocation[0];
 const errColumn = errLocation[1];
-
 const htmlWithModuleScript = `
 <!-- source order matters -->
 <script src="stackutils/source-map.js"></script>
@@ -93,7 +92,7 @@ const app = http.createServer((req, res) => {
   if (match) {
     body = fs.readFileSync(`${__dirname}/assets/${match[1]}`);
     type = "application/javascript";
-  } else if (req.url.match(new RegExp(/bundle.js/))) {
+  } else if (req.url.match("/8c2052c2-11f5-11ea-a8a0-378c234bfe28-bundle.js")) {
     body = fs.readFileSync(minifiedSource);
     type = "application/javascript";
   } else if (req.url.match(new RegExp(basename(sourceMap) + "$"))) {

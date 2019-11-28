@@ -1,6 +1,6 @@
 async function main(port, lineNumber, columnNumber) {
   var stackframe = new StackFrame({
-    fileName: `http://localhost:${port}/bundle.js`,
+    fileName: `http://localhost:${port}/8c2052c2-11f5-11ea-a8a0-378c234bfe28-bundle.js`,
     lineNumber,
     columnNumber
   });
