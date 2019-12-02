@@ -82,7 +82,15 @@ async function evaluatePageContent() {
 
   await page.goto(`http://localhost:${port}`);
 
-  setTimeout(() => die("No result within timeout."), 1000);
+  const totalTimeout = 5000;
+  const firstTimeWarning = 1500;
+  setTimeout(() => {
+    console.log("This is taking a bit longer than expected ...");
+    setTimeout(
+      () => die("No results within 5 seconds. Aborting"),
+      totalTimeout - firstTimeWarning
+    );
+  }, firstTimeWarning);
 }
 
 const app = http.createServer((req, res) => {
