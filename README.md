@@ -11,7 +11,7 @@ If you download `app-bundle.js` and `app-bundle.js.map` you can get the original
 source lines like this:
 
 ```
-$ npx @fatso83/stacktrace-cli dist/app-bundle.js* 129:600036
+$ npx @fatso83/stacktrace-cli app-bundle.js app-bundle.js.map 129:600036
 {
     "columnNumber": 56,
     "lineNumber": 78,
